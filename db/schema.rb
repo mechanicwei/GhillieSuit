@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2018_04_17_014906) do
     t.jsonb "limit_settings", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["key"], name: "index_short_urls_on_key"
+    t.index ["key"], name: "index_short_urls_on_key", unique: true
   end
 
 end
