@@ -28,4 +28,13 @@ RSpec.describe ShortUrlsController, type: :controller do
       end
     end
   end
+
+  describe 'GET show' do
+    let!(:short_url) { Fabricate :short_url }
+
+    it 'returns http success' do
+      get :show, params: { id: short_url.id }
+      expect(response.status).to eq 200
+    end
+  end
 end
