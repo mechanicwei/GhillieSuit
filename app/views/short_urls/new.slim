@@ -1,6 +1,6 @@
 .row
   .col-md-8.col-md-offset-2
-    = form_for ShortUrl.new, url: 'test' do |f|
+    = form_for @short_url do |f|
       .form-group
         = f.label '目标URL'
         = f.text_field :destination, class: 'form-control', placeholder: '必填'
@@ -13,9 +13,10 @@
 
       label 字符集（默认全部）
       - ShortUrl::VALID_CHAR_SET.each do |item|
+        - checked = Array.wrap(@short_url.char_set).include?(item)
         .checkbox
           label
-            = f.check_box :char_set, { multiple: true }, item, nil
+            = f.check_box :char_set, { multiple: true, checked: checked }, item, nil
             = item
 
       = f.submit '创建', class: 'btn btn-default'

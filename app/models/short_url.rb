@@ -35,7 +35,7 @@ class ShortUrl < ApplicationRecord
 
   def generate_key(chars)
     key_length = length.presence || DEFAULT_URL_LENGTH
-    chars.sample(key_length).join
+    chars.sample(key_length.to_i).join
   end
 
   def total_chars

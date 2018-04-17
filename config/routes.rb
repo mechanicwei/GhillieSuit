@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resources :short_urls, only: [:new]
+  resources :short_urls, only: [:new, :create]
 end
