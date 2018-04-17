@@ -26,22 +26,22 @@ class ShortUrl < ApplicationRecord
   end
 
   def generate_uniq_key
+    _total_chars = total_chars
     while true do
-      unique_key = generate_key
+      unique_key = generate_key(_total_chars)
       break unique_key unless self.class.exists?(key: unique_key)
     end
   end
 
-  def generate_key
+  def generate_key(chars)
     key_length = length.presence || DEFAULT_URL_LENGTH
-
-    key_length.times.map do
-      VALID_CHAR_SET_MAP[valid_char_set.sample].sample
-    end.join
+    chars.sample(key_length).join
   end
 
-  def valid_char_set
+  def total_chars
     _char_set = Array.wrap(char_set) & VALID_CHAR_SET
-    _char_set.present? ? _char_set : VALID_CHAR_SET
+    _char_set = _char_set.presence || VALID_CHAR_SET
+
+    _char_set.map { |item| VALID_CHAR_SET_MAP[item] }.flatten
   end
 end
