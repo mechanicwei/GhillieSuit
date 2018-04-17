@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 50
+  username:
+  password:
+  host: localhost
+
+development:
+  <<: *default
+  database: ghillie_suit_dev
+
+test:
+  <<: *default
+  database: ghillie_suit_test
+
+production:
+  <<: *default
+  database: ghillie_suit_prod
