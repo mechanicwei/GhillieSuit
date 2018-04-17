@@ -7,7 +7,7 @@
     = f.label '自定义短连接'
     = f.text_field :custom_key, class: 'form-control', placeholder: '选填'
   .form-group
-    = f.label "短连接长度（默认：#{ShortUrl::DEFAULT_URL_LENGTH}）"
+    = f.label "短连接长度（默认：#{ShortUrl::DEFAULT_URL_LENGTH}，可选范围：#{ShortUrl::URL_LENGTH_RANGE.min}~#{ShortUrl::URL_LENGTH_RANGE.max}）"
     = f.number_field :length, class: 'form-control', placeholder: '选填'
 
   label 字符集（默认全部）

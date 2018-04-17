@@ -1,5 +1,6 @@
 class ShortUrl < ApplicationRecord
   DEFAULT_URL_LENGTH = 8
+  URL_LENGTH_RANGE = 5..20
 
   VALID_CHAR_SET_MAP = {
     'A-Z' => ('A'..'Z').to_a,
@@ -11,7 +12,7 @@ class ShortUrl < ApplicationRecord
   VALID_CHAR_SET = VALID_CHAR_SET_MAP.keys
 
   validates :destination, presence: true
-  validates :key, presence: true, uniqueness: true
+  validates :key, presence: true, uniqueness: true, length: { in: URL_LENGTH_RANGE }
 
   before_validation :set_key
 
@@ -34,8 +35,7 @@ class ShortUrl < ApplicationRecord
   end
 
   def generate_key(chars)
-    key_length = length.presence || DEFAULT_URL_LENGTH
-    chars.sample(key_length.to_i).join
+    chars.sample(key_length).join
   end
 
   def total_chars
@@ -43,5 +43,13 @@ class ShortUrl < ApplicationRecord
     _char_set = _char_set.presence || VALID_CHAR_SET
 
     _char_set.map { |item| VALID_CHAR_SET_MAP[item] }.flatten
+  end
+
+  def key_length
+    if length.present? && URL_LENGTH_RANGE.include?(length.to_i)
+      length.to_i
+    else
+      DEFAULT_URL_LENGTH
+    end
   end
 end

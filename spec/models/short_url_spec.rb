@@ -1,6 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe ShortUrl, type: :model do
+  describe 'Key length range' do
+    it 'uses the custom length if valid' do
+      short_url = Fabricate :short_url, length: 10
+      expect(short_url.key.length).to eq 10
+    end
+
+    it 'uses default length if invalid' do
+      short_url = Fabricate :short_url, length: 100
+      expect(short_url.key.length).to eq 8
+    end
+  end
+
   describe '#set_key' do
     context 'Create' do
       it 'set a key that length is 8' do
