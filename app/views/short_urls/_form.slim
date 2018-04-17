@@ -1,0 +1,20 @@
+= form_for short_url do |f|
+  .form-group
+    = f.label '目标URL'
+    = f.text_field :destination, class: 'form-control', placeholder: '必填'
+  .form-group
+    = f.label '自定义短连接'
+    = f.text_field :custom_key, class: 'form-control', placeholder: '选填'
+  .form-group
+    = f.label "短连接长度（默认：#{ShortUrl::DEFAULT_URL_LENGTH}）"
+    = f.number_field :length, class: 'form-control', placeholder: '选填'
+
+  label 字符集（默认全部）
+  - ShortUrl::VALID_CHAR_SET.each do |item|
+    - checked = Array.wrap(short_url.char_set).include?(item)
+    .checkbox
+      label
+        = f.check_box :char_set, { multiple: true, checked: checked }, item, nil
+        = item
+
+  = f.submit '创建', class: 'btn btn-default'

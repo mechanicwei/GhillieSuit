@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resources :short_urls, only: [:new, :create, :show]
+  resources :short_urls, except: [:index, :destroy]
 end
