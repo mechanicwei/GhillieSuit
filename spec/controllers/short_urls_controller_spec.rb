@@ -77,4 +77,19 @@ RSpec.describe ShortUrlsController, type: :controller do
       }.to change { ShortUrl.count }.by -1
     end
   end
+
+  describe 'GET travel' do
+    let!(:short_url) { Fabricate :short_url }
+
+    it 'increments travel_count by 1' do
+      expect {
+        get :travel, params: { key: short_url.key }
+      }.to change { short_url.reload.travel_count }.by 1
+    end
+
+    it 'redirects to destination' do
+      get :travel, params: { key: short_url.key }
+      expect(response).to redirect_to(short_url.destination)
+    end
+  end
 end

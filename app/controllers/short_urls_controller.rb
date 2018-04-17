@@ -1,5 +1,5 @@
 class ShortUrlsController < ApplicationController
-  before_action :find_short_url, except: [:new, :create]
+  before_action :find_short_url, except: [:new, :create, :travel]
 
   def new
     @short_url = ShortUrl.new
@@ -37,6 +37,12 @@ class ShortUrlsController < ApplicationController
 
     flash[:success] = '删除成功'
     redirect_to [:new, :short_url]
+  end
+
+  def travel
+    @short_url = ShortUrl.find_by!(key: params[:key])
+    @short_url.increment!(:travel_count)
+    redirect_to @short_url.destination
   end
 
   private
