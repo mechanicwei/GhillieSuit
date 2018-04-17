@@ -1,6 +1,15 @@
-div 目标URL
-div = @short_url.destination
-div 短连接
-div TODO
-div
-  = link_to '删除', @short_url, method: :delete
+table.table.table-hover
+  tr
+    td 目标URL
+    td = @short_url.destination
+  tr
+    td 短连接
+    td = link_to travel_url(@short_url.key), travel_path(@short_url.key)
+  tr
+    td 访问次数
+    td = @short_url.travel_count
+  tr
+    td 操作
+    td.operations
+      = link_to '修改', [:edit, @short_url]
+      = link_to '删除', @short_url, method: :delete, data: { confirm: '确认删除？' }
