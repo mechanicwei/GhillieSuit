@@ -1,3 +1,4 @@
+- button_name = short_url.persisted? ? '更新' : '创建'
 = form_for short_url do |f|
   .form-group
     = f.label '目标URL'
@@ -17,4 +18,4 @@
         = f.check_box :char_set, { multiple: true, checked: checked }, item, nil
         = item
 
-  = f.submit '创建', class: 'btn btn-default'
+  = f.submit button_name, class: 'btn btn-default'
