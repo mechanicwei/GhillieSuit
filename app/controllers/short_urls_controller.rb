@@ -1,5 +1,5 @@
 class ShortUrlsController < ApplicationController
-  before_action :find_short_url, only: [:show, :edit, :update]
+  before_action :find_short_url, except: [:new, :create]
 
   def new
     @short_url = ShortUrl.new
@@ -30,6 +30,13 @@ class ShortUrlsController < ApplicationController
       flash.now[:danger] = @short_url.errors.full_messages.join('，')
       render :edit
     end
+  end
+
+  def destroy
+    @short_url.destroy
+
+    flash[:success] = '删除成功'
+    redirect_to [:new, :short_url]
   end
 
   private

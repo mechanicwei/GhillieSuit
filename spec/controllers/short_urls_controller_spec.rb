@@ -67,4 +67,14 @@ RSpec.describe ShortUrlsController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE destroy' do
+    let!(:short_url) { Fabricate :short_url }
+
+    it 'deletes teh short_url' do
+      expect {
+        delete :destroy, params: { id: short_url.id }
+      }.to change { ShortUrl.count }.by -1
+    end
+  end
 end
