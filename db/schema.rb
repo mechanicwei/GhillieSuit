@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 2018_04_18_020632) do
     t.jsonb "limit_settings", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "api_applications_id"
-    t.index ["api_applications_id"], name: "index_short_urls_on_api_applications_id"
+    t.bigint "api_application_id"
+    t.index ["api_application_id"], name: "index_short_urls_on_api_application_id"
     t.index ["key"], name: "index_short_urls_on_key", unique: true
   end
 

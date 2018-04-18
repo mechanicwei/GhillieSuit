@@ -6,6 +6,6 @@ class CreateApiApplications < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_belongs_to :short_urls, :api_applications
+    add_belongs_to :short_urls, :api_application
   end
 end
