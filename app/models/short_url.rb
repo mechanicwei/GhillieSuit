@@ -28,10 +28,24 @@ class ShortUrl < ApplicationRecord
 
   def generate_uniq_key
     _total_chars = total_chars
-    while true do
+    unique_key = nil
+    generate_count = 0
+
+    while generate_count < 10 do
       unique_key = generate_key(_total_chars)
-      break unique_key unless self.class.exists?(key: unique_key)
+      if self.class.exists?(key: unique_key)
+        unique_key = nil
+        generate_count += 1
+      else
+        break
+      end
     end
+
+    unless unique_key
+      errors.add(:base, '无法找到可用的短连接')
+    end
+
+    unique_key
   end
 
   def generate_key(chars)
