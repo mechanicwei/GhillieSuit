@@ -23,6 +23,6 @@ class Api::V1::ApplicationController < ApplicationController
   def validate_private_token
     private_token = params[:private_token] || request.headers['PRIVATE-TOKEN']
     @api_application = ApiApplication.find_by(private_token: private_token)
-    render json: { message: "401 Unauthorized" }, status: 401 unless @api_application
+    render json: { errors: ['401 Unauthorized'] }, status: 401 unless @api_application
   end
 end
