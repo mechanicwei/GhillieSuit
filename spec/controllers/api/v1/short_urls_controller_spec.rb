@@ -49,4 +49,14 @@ RSpec.describe Api::V1::ShortUrlsController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE destroy' do
+    let!(:short_url) { Fabricate :short_url, api_application: api_application }
+
+    it 'deletes teh short_url' do
+      expect {
+        delete :destroy, params: { id: short_url.id }
+      }.to change { ShortUrl.count }.by -1
+    end
+  end
 end

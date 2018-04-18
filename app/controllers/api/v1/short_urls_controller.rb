@@ -18,6 +18,11 @@ class Api::V1::ShortUrlsController < Api::V1::ApplicationController
     end
   end
 
+  def destroy
+    @short_url.destroy
+    head 204
+  end
+
   private
 
   def short_url_params
