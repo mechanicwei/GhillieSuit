@@ -23,6 +23,9 @@ class Api::V1::ShortUrlsController < Api::V1::ApplicationController
     head 204
   end
 
+  def show
+  end
+
   private
 
   def short_url_params

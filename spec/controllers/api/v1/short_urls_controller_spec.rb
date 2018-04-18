@@ -59,4 +59,13 @@ RSpec.describe Api::V1::ShortUrlsController, type: :controller do
       }.to change { ShortUrl.count }.by -1
     end
   end
+
+  describe 'GET show' do
+    let!(:short_url) { Fabricate :short_url, api_application: api_application }
+
+    it 'return http success' do
+      get :show, params: { id: short_url.id }
+      expect(response.status).to eq 200
+    end
+  end
 end
