@@ -9,7 +9,7 @@
 
 ### 注解
 #### 授权
-2种方式（选1）
+2种方式（选1），一个ApiApplication对一个private_token
 - 传private_token参数，例：`/api/v1/short_urls?private_token=QVy1PB7sTxfy4pqfZM1U`
 - 指定PRIVATE-TOKEN header，例：`curl --header "PRIVATE-TOKEN: QVy1PB7sTxfy4pqfZM1U" "http://domain/api/v1/short_urls"`
 
