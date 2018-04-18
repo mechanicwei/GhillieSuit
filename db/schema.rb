@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_17_014906) do
+ActiveRecord::Schema.define(version: 2018_04_18_020632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_applications", force: :cascade do |t|
+    t.string "private_token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "short_urls", force: :cascade do |t|
     t.string "destination"
@@ -22,6 +28,8 @@ ActiveRecord::Schema.define(version: 2018_04_17_014906) do
     t.jsonb "limit_settings", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "api_applications_id"
+    t.index ["api_applications_id"], name: "index_short_urls_on_api_applications_id"
     t.index ["key"], name: "index_short_urls_on_key", unique: true
   end
 

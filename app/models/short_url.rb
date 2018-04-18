@@ -11,6 +11,8 @@ class ShortUrl < ApplicationRecord
   }.freeze
   VALID_CHAR_SET = VALID_CHAR_SET_MAP.keys
 
+  belongs_to :api_application, optional: true
+
   validates :destination, presence: true
   validates :key, presence: true, uniqueness: true, length: { in: URL_LENGTH_RANGE }, allow_nil: nil
 
