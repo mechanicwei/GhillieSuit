@@ -36,7 +36,7 @@ RSpec.describe Api::V1::ShortUrlsController, type: :controller do
 
     context 'with valid attrs' do
       it 'updates the short_url' do
-        post :update, params: valid_attrs.merge(id: short_url.id)
+        post :update, params: valid_attrs.merge(id: short_url.key)
         expect(short_url.reload.destination).to eq 'http://new'
       end
     end
@@ -44,7 +44,7 @@ RSpec.describe Api::V1::ShortUrlsController, type: :controller do
     context 'with invalid attrs' do
       it 'doesnt update the short_url' do
         expect {
-          post :update, params: invalid_attrs.merge(id: short_url.id)
+          post :update, params: invalid_attrs.merge(id: short_url.key)
         }.not_to change { short_url.reload.destination }
       end
     end
@@ -55,7 +55,7 @@ RSpec.describe Api::V1::ShortUrlsController, type: :controller do
 
     it 'deletes teh short_url' do
       expect {
-        delete :destroy, params: { id: short_url.id }
+        delete :destroy, params: { id: short_url.key }
       }.to change { ShortUrl.count }.by -1
     end
   end
@@ -64,7 +64,7 @@ RSpec.describe Api::V1::ShortUrlsController, type: :controller do
     let!(:short_url) { Fabricate :short_url, api_application: api_application }
 
     it 'return http success' do
-      get :show, params: { id: short_url.id }
+      get :show, params: { id: short_url.key }
       expect(response.status).to eq 200
     end
   end

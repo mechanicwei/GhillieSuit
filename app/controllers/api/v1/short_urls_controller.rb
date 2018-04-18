@@ -36,6 +36,6 @@ class Api::V1::ShortUrlsController < Api::V1::ApplicationController
   end
 
   def find_short_url
-    @short_url = @api_application.short_urls.find params[:id]
+    @short_url = @api_application.short_urls.find_by! key: params[:id]
   end
 end
