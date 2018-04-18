@@ -4,4 +4,10 @@ Rails.application.routes.draw do
   resources :short_urls, except: [:index]
 
   root 'short_urls#new'
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :short_urls, only: [:create]
+    end
+  end
 end
