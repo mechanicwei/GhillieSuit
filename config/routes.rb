@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :short_urls, only: [:create]
+      resources :short_urls, only: [:create, :update]
     end
   end
 end

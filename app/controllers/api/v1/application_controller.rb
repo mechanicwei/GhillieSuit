@@ -5,6 +5,11 @@ class Api::V1::ApplicationController < ApplicationController
 
   before_action :validate_private_token
 
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    Rails.logger.warn "#{exception.inspect}"
+    render json: { errors: ['没有找到相应的短连接'] }, status: :not_found
+  end
+
   private
 
   def render_json_error(obj = nil)
